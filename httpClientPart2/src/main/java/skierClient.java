@@ -116,7 +116,7 @@ public class skierClient {
     long maxLatency = Collections.max(latencies);
     double meanLatency = latencies.stream().mapToLong(Long::longValue).average().orElse(0.0);
     long medianLatency = latencies.get(latencies.size() / 2);
-    long p99Latency = latencies.get((int) Math.ceil(0.99 * latencies.size()) - 1); // 99th percentile
+    long p99Latency = latencies.get((int) Math.ceil(0.99 * latencies.size()) - 1);
 
 
     System.out.println("Latency Statistics:");

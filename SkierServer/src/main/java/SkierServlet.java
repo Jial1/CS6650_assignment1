@@ -11,15 +11,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
 
-// Define the servlet with a capital 'S' to follow Java naming conventions
+
 @WebServlet(value = "/skiers/*")
 public class SkierServlet extends HttpServlet {
-
-
   private static final Gson gson = new Gson();
-//  private static final Logger logger = Logger.getLogger(SkierServlet.class.getName());
-
-  // Define constants for validation
   private static final int MIN_LIFT_ID = 1;
   private static final int MAX_LIFT_ID = 40;
   private static final int MIN_SKIER_ID = 1;
@@ -34,7 +29,7 @@ public class SkierServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res)
       throws ServletException, IOException {
-    // Set response headers
+
     res.setContentType("application/json");
     res.setCharacterEncoding("UTF-8");
 
@@ -65,18 +60,18 @@ public class SkierServlet extends HttpServlet {
         return;
       }
       res.setStatus(HttpServletResponse.SC_CREATED);
+
       SuccessResponse successResponse = new SuccessResponse("POST request processed", liftRideEvent);
       String jsonResponse = gson.toJson(successResponse);
       PrintWriter out = res.getWriter();
       out.write(jsonResponse);
+
     } catch (JsonSyntaxException e) {
       sendErrorResponse(res, HttpServletResponse.SC_BAD_REQUEST, "Invalid request body");
     }
   }
 
-  /**
-   * Reads the entire request body and returns it as a String.
-   */
+
   private String readRequestBody(HttpServletRequest req) throws IOException {
     StringBuilder requestData = new StringBuilder();
     try (BufferedReader reader = req.getReader()) {
@@ -88,9 +83,7 @@ public class SkierServlet extends HttpServlet {
     return requestData.toString().trim();
   }
 
-  /**
-   * Sends a JSON-formatted error response with the specified status code and message.
-   */
+
   private void sendErrorResponse(HttpServletResponse res, int statusCode, String message)
       throws IOException {
     res.setStatus(statusCode);
@@ -100,9 +93,7 @@ public class SkierServlet extends HttpServlet {
     out.write(jsonError);
   }
 
-  /**
-   * Validates the input LiftRideEvent object.
-   */
+
   private boolean isInputValid(LiftRideEvent liftRideEvent, HttpServletResponse res)
       throws IOException {
     if (liftRideEvent.getLiftId() < MIN_LIFT_ID || liftRideEvent.getLiftId() > MAX_LIFT_ID) {
@@ -136,9 +127,7 @@ public class SkierServlet extends HttpServlet {
     return true;
   }
 
-  /**
-   * Validates the URL structure /skierServer_war/skiers/{resortID}/seasons/{seasonID}/days/{dayID}/skiers/{skierID}:.
-   */
+
   private boolean isUrlValid(String[] urlPath) {
     if (urlPath == null || urlPath.length != 10) {
       return false;

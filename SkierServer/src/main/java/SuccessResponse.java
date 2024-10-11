@@ -7,7 +7,7 @@ public class SuccessResponse {
     this.data = data;
   }
 
-  // Getters for Gson serialization
+
   public String getMessage() {
     return message;
   }

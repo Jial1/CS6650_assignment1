@@ -44,6 +44,9 @@ public class skierClient {
      }
      executorService.shutdown();
 
+//     LiftRideEventPoster test = new LiftRideEventPoster(eventQueue, 1000, url, failRequest, httpClient, successRequest);
+//     Thread testThread = new Thread(test);
+//     testThread.start();
 
      try {
        boolean finished = executorService.awaitTermination(1, TimeUnit.HOURS);
@@ -55,7 +58,13 @@ public class skierClient {
        System.out.println("Execution interrupted.");
      }
 
-     // Ensure the event generator has finished
+//     try {
+//       testThread.join();
+//     } catch (InterruptedException e) {
+//       Thread.currentThread().interrupt();
+//       System.out.println("Event generator interrupted.");
+//     }
+
      try {
        eventThread.join();
      } catch (InterruptedException e) {

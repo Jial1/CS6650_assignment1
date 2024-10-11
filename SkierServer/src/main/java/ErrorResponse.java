@@ -5,7 +5,7 @@ public class ErrorResponse {
     this.error = error;
   }
 
-  // Getter for Gson serialization
+
   public String getError() {
     return error;
   }

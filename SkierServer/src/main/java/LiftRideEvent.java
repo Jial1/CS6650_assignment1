@@ -20,6 +20,7 @@ public class LiftRideEvent {
   public int getSkierId() {
     return skierId;
   }
+
   public int getResortId() {
     return resortId;
   }
